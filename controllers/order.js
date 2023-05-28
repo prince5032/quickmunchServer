@@ -2,6 +2,7 @@ import { asyncError } from "../middlewares/errorMiddleware.js";
 import { Order } from "../models/Order.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 
+
 export const placeOrder = asyncError(async (req, res, next) => {
     const {
       shippingInfo,
@@ -13,7 +14,7 @@ export const placeOrder = asyncError(async (req, res, next) => {
       totalAmount,
     } = req.body;
   
-    const user = req_user._id;
+    const user = req.user._id;
   
     const orderOptions = {
       shippingInfo,
@@ -33,6 +34,8 @@ export const placeOrder = asyncError(async (req, res, next) => {
       message: "Order Placed Successfully via Cash On Delivery",
     });
   });
+
+  
 
 
   export const getMyOrders = asyncError(async(req,res,next)=>{

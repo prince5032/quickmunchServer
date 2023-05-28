@@ -1,6 +1,6 @@
 import express, { urlencoded } from "express";
 import dotenv from "dotenv";
-import { connectPassport } from "./utils/provider.js";
+import { connectPassport } from "./utils/Provider.js";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import session from 'express-session';
@@ -24,11 +24,11 @@ app.use(
         resave: false,
         saveUninitialized: false,
 
-        cookie: {
-            secure: process.env.NODE_ENV === "development" ? false : true,
-            httpOnly: process.env.NODE_ENV === "development" ? false : true,
-            sameSite: process.env.NODE_ENV === "development" ? false : "none",
-          },
+        // cookie: {
+        //     secure: true,
+        //     httpOnly: true,
+        //     sameSite : "none",
+        //   },
 })
 );
 app.use(cookieParser());

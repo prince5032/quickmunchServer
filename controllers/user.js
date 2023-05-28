@@ -2,7 +2,7 @@ import {asyncError} from "../middlewares/errorMiddleware.js"
 import {User}from "../models/User.js"
 import { Order } from "../models/Order.js";
 
-export const myProfile =(req,res,next)=> {
+export const myProfile =(req, res, next)=> {
  res.status(200).json({
         success:true,
         user: req.user,
@@ -14,9 +14,9 @@ export const logout = (req, res, next) => {
   req.session.destroy((err) => {
     if (err) return next(err);
     res.clearCookie("connect.sid", {
-      secure: process.env.NODE_ENV === "development" ? false : true,
-      httpOnly: process.env.NODE_ENV === "development" ? false : true,
-      sameSite: process.env.NODE_ENV === "development" ? false : "none",
+      secure:   true,
+      httpOnly:  true,
+      sameSite:  "none",
     });
     res.status(200).json({
       message: "Logged Out",
@@ -30,7 +30,6 @@ export const logout = (req, res, next) => {
     res.status(200).json({
       success:true,
       users,
-
     });
   });
 
@@ -42,11 +41,13 @@ export const logout = (req, res, next) => {
 
     const orders = await Order.find({});
 
-    const preparingOrders = orders.filter(i=> i.orderStatus==="Preparing");
-    const shippedOrders = orders.filter(i=> i.orderStatus==="Shipped");
-    const deliveredOrders = orders.filter(i=> i.orderStatus==="Delivered");
+    const preparingOrders = orders.filter((i)=> i.orderStatus==="Preparing");
+    const shippedOrders = orders.filter((i)=> i.orderStatus==="Shipped");
+    const deliveredOrders = orders.filter((i)=> i.orderStatus==="Delivered");
 
     let totalIncome = 0;
+
+
     orders.forEach((i)=>{
       totalIncome+=i.totalAmount;
     });
