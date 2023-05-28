@@ -1,6 +1,6 @@
 import express, { urlencoded } from "express";
 import dotenv from "dotenv";
-import { connectPassport } from "./utils/Provider.js";
+import { connectPassport } from "./utils/provider.js";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import session from 'express-session';
